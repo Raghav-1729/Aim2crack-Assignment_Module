@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <style>
+       h1 {text-align: center;}
+       button {
+    margin:  auto;
+    display: block;
+}
+       textarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+       </style>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <h1>Add Instructions</h1>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <textarea name="instructions" id="inst" cols="100" rows="15" placeholder ="Write instructions here ..." >{{instruction.instructions}}</textarea>    
+        
+        <button type="submit" class="submitb">Update Instructions</button>
+
+    </form>
+    <a href="../">Back</a>
+</body>
+</html>
