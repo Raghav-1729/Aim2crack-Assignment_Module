@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('logout/',views.do_logout,name='CreateAssignment-logout'),
 
+    path('ass_summary/',views.ass_summary,name='CreateAssignment-ass_summary'),
+
     path('<slug:link>/instructions/',views.instructions,name='CreateAssignment-instructions'),
 
     path('<slug:link>/', views.summary,name='CreateAssignment-summary'),

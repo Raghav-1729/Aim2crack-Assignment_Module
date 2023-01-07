@@ -1,6 +1,5 @@
 from asyncio.windows_events import NULL
 import datetime 
-from http.client import REQUEST_HEADER_FIELDS_TOO_LARGE
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
@@ -10,7 +9,6 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView,DeleteView
-from django.contrib import messages
 
 RANDOM_LINK_GENERATED=''
 def randlink():
@@ -136,6 +134,13 @@ def summary(request,link):
                 nos+=1
                 j+=1
         return render(request,"CreateAssignment/stu_instructions.html",{"lines" : instructions,"assign": code,"noq":num_of_ques })
+
+@login_required
+def ass_summary(request):
+    pro=Profile.objects.filter(user=request.user).first()
+    if pro.type=='t':
+        ass_total=createlink.objects.filter(creator=request.user).all()
+        return render(request,'CreateAssignment/ass_summary.html',{"assign_t":reversed(ass_total)})
 
 @login_required
 def instructions(request,link):
